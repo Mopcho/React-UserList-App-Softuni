@@ -1,17 +1,25 @@
-export const UserItem = () => {
+export const UserItem = (props) => {
 	return (
-		<>
+		<tr>
 			<td>
-				<img src="" alt="" className="image" />
+				<img
+					src={props.imageUrl}
+					alt="profileImage"
+					className="image"
+				/>
 			</td>
-			<td>firstName</td>
-			<td>lastName</td>
-			<td>email</td>
-			<td>phoneNumber</td>
-			<td>createdAt</td>
+			<td>{props.firstName}</td>
+			<td>{props.lastName}</td>
+			<td>{props.email}</td>
+			<td>{props.phoneNumber}</td>
+			<td>{props.createdAt}</td>
 
 			<td className="actions">
-				<button className="btn edit-btn" title="Edit">
+				<button
+					className="btn edit-btn"
+					title="Edit"
+					onClick={props.openEdit}
+				>
 					<svg
 						aria-hidden="true"
 						focusable="false"
@@ -28,7 +36,11 @@ export const UserItem = () => {
 						></path>
 					</svg>
 				</button>
-				<button className="btn delete-btn" title="Delete">
+				<button
+					className="btn delete-btn"
+					title="Delete"
+					onClick={props.openDelete}
+				>
 					<svg
 						aria-hidden="true"
 						focusable="false"
@@ -45,7 +57,11 @@ export const UserItem = () => {
 						></path>
 					</svg>
 				</button>
-				<button className="btn info-btn" title="Info">
+				<button
+					className="btn info-btn"
+					title="Info"
+					onClick={props.openDetails}
+				>
 					<svg
 						aria-hidden="true"
 						focusable="false"
@@ -63,6 +79,6 @@ export const UserItem = () => {
 					</svg>
 				</button>
 			</td>
-		</>
+		</tr>
 	);
 };

@@ -1,4 +1,4 @@
-export const UserDelete = () => {
+export const UserDelete = (props) => {
 	return (
 		<div className="overlay">
 			<div className="backdrop"></div>
@@ -6,7 +6,7 @@ export const UserDelete = () => {
 				<div className="confirm-container">
 					<header className="headers">
 						<h2>Are you sure you want to delete account?</h2>
-						<button className="btn close">
+						<button className="btn close" onClick={props.onClose}>
 							<svg
 								aria-hidden="true"
 								focusable="false"
@@ -37,7 +37,7 @@ export const UserDelete = () => {
 								id="action-cancel"
 								className="btn"
 								type="button"
-								onClick={onClose}
+								onClick={props.onClose}
 							>
 								Cancel
 							</button>

@@ -1,4 +1,17 @@
-export const UserCreate = () => {
+export const UserCreate = (props) => {
+	async function onSubmit(ev) {
+		console.log(ev);
+		ev.preventDefault();
+		try {
+			await fetch('http://localhost:3005/api/users', {
+				method: 'POST',
+				body: JSON.stringify(ev.target.value),
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	return (
 		<div className="overlay">
 			<div className="backdrop"></div>
@@ -6,7 +19,7 @@ export const UserCreate = () => {
 				<div className="user-container">
 					<header className="headers">
 						<h2>Add User</h2>
-						<button className="btn close">
+						<button className="btn close" onClick={props.onClose}>
 							<svg
 								aria-hidden="true"
 								focusable="false"
@@ -24,7 +37,7 @@ export const UserCreate = () => {
 							</svg>
 						</button>
 					</header>
-					<form onSubmit={onUserCreate}>
+					<form onSubmit={onSubmit}>
 						<div className="form-row">
 							<div className="form-group">
 								<label htmlFor="firstName">First name</label>
@@ -194,7 +207,7 @@ export const UserCreate = () => {
 								id="action-cancel"
 								className="btn"
 								type="button"
-								onClick={onClose}
+								onClick={props.onClose}
 							>
 								Cancel
 							</button>

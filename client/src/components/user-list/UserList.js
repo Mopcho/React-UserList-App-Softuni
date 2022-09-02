@@ -1,8 +1,78 @@
 import { UserItem } from './user-item/UserItem';
+import { useEffect, useState } from 'react';
+import { UserEdit } from './user-edit/UserEdit';
+import { UserDelete } from './user-delete/UserDelete';
+import { UserDetails } from './user-details/UserDetails';
+import { UserCreate } from './user-create/UserCreate';
 
 export const UserList = () => {
+	let [users, setUsers] = useState([]);
+	let [editToggle, setEditToggle] = useState(false);
+	let [deleteToggle, setDeleteToggle] = useState(false);
+	let [infoToggle, setInfoToggle] = useState(false);
+	let [createToggle, setCreateToggle] = useState(false);
+
+	useEffect(() => {
+		async function fetchData() {
+			let response = await fetch('http://localhost:3005/api/users');
+			response = await response.json();
+
+			setUsers(response.users);
+		}
+
+		fetchData();
+	}, []);
+
+	function openEdit() {
+		setEditToggle(true);
+	}
+
+	function closeEdit() {
+		setEditToggle(false);
+	}
+
+	function openDelete() {
+		setDeleteToggle(true);
+	}
+
+	function closeDelete() {
+		setDeleteToggle(false);
+	}
+
+	function openDetails() {
+		setInfoToggle(true);
+	}
+
+	function closeInfo() {
+		setInfoToggle(false);
+	}
+
+	function openCreate() {
+		setCreateToggle(true);
+	}
+
+	function closeCreate() {
+		setCreateToggle(false);
+	}
+
 	return (
 		<>
+			{editToggle === true ? (
+				<UserEdit onClose={closeEdit}></UserEdit>
+			) : null}
+
+			{deleteToggle === true ? (
+				<UserDelete onClose={closeDelete}></UserDelete>
+			) : null}
+
+			{infoToggle === true ? (
+				<UserDetails onClose={closeInfo}></UserDetails>
+			) : null}
+
+			{createToggle === true ? (
+				<UserCreate onClose={closeCreate}></UserCreate>
+			) : null}
+
 			<div className="table-wrapper">
 				<table className="table">
 					<thead>
@@ -102,11 +172,23 @@ export const UserList = () => {
 						</tr>
 					</thead>
 					<tbody>
-						<UserItem></UserItem>
+						{users
+							? users.map((user) => (
+									<UserItem
+										key={user._id}
+										{...user}
+										openEdit={openEdit}
+										openDelete={openDelete}
+										openDetails={openDetails}
+									/>
+							  ))
+							: null}
 					</tbody>
 				</table>
 			</div>
-			<button className="btn-add btn">Add new user</button>
+			<button className="btn-add btn" onClick={openCreate}>
+				Add new user
+			</button>
 		</>
 	);
 };
