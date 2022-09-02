@@ -1,14 +1,14 @@
-import { Footer } from './components/footer/Footer';
-import { Header } from './components/header/Header';
-import { UsersWindow } from './components/UsersWindow';
+import { UserList } from './components/user-list/UserList';
+import { Header } from './components/common/Header';
+import { Footer } from './components/common/Footer';
 import './styles.css';
 
 function App() {
 	return (
 		<div>
-			<Header />
+			<Header></Header>
 			<main class="main">
-				<UsersWindow></UsersWindow>
+				<UserList></UserList>
 			</main>
 			<Footer></Footer>
 		</div>

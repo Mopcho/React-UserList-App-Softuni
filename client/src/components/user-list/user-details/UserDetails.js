@@ -1,20 +1,18 @@
-import '../styles.css';
-
 export const UserDetails = () => {
 	return (
-		<div classname="overlay">
-			<div classname="backdrop" />
-			<div classname="modal">
-				<div classname="detail-container">
-					<header classname="headers">
+		<div className="overlay">
+			<div className="backdrop" />
+			<div className="modal">
+				<div className="detail-container">
+					<header className="headers">
 						<h2>User Detail</h2>
-						<button classname="btn close">
+						<button className="btn close">
 							<svg
 								aria-hidden="true"
 								focusable="false"
 								data-prefix="fas"
 								data-icon="xmark"
-								classname="svg-inline--fa fa-xmark"
+								className="svg-inline--fa fa-xmark"
 								role="img"
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 320 512"
@@ -26,43 +24,38 @@ export const UserDetails = () => {
 							</svg>
 						</button>
 					</header>
-					<div classname="content">
-						<div classname="image-container">
+					<div className="content">
+						<div className="image-container">
 							<img
 								src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
 								alt=""
-								classname="image"
+								className="image"
 							/>
 						</div>
-						<div classname="user-details">
+						<div className="user-details">
 							<p>
-								User Id:{' '}
-								<strong>62bb0c0eda039e2fdccba57b</strong>
+								User Id: <strong></strong>
 							</p>
 							<p>
 								Full Name:
-								<strong> Peter Johnson </strong>
+								<strong></strong>
 							</p>
 							<p>
-								Email: <strong>peter@abv.bg</strong>
+								Email: <strong></strong>
 							</p>
 							<p>
-								Phone Number: <strong>0812345678</strong>
+								Phone Number: <strong></strong>
 							</p>
 							<p>
 								Address:
-								<strong>
-									{' '}
-									Bulgaria, Sofia, Aleksandar Malinov 78{' '}
-								</strong>
+								<strong></strong>
+							</p>
+
+							<p>
+								Created on: <strong></strong>
 							</p>
 							<p>
-								Created on:{' '}
-								<strong>Wednesday, June 28, 2022</strong>
-							</p>
-							<p>
-								Modified on:{' '}
-								<strong>Thursday, June 29, 2022</strong>
+								Modified on: <strong></strong>
 							</p>
 						</div>
 					</div>

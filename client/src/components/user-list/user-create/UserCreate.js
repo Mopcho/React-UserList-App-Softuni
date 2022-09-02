@@ -1,20 +1,18 @@
-import '../styles.css';
-
-export const CreateUser = () => {
+export const UserCreate = () => {
 	return (
-		<div classname="overlay">
-			<div classname="backdrop" />
-			<div classname="modal">
-				<div classname="user-container">
-					<header classname="headers">
-						<h2>Edit User/Add User</h2>
-						<button classname="btn close">
+		<div className="overlay">
+			<div className="backdrop"></div>
+			<div className="modal">
+				<div className="user-container">
+					<header className="headers">
+						<h2>Add User</h2>
+						<button className="btn close">
 							<svg
 								aria-hidden="true"
 								focusable="false"
 								data-prefix="fas"
 								data-icon="xmark"
-								classname="svg-inline--fa fa-xmark"
+								className="svg-inline--fa fa-xmark"
 								role="img"
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 320 512"
@@ -26,13 +24,13 @@ export const CreateUser = () => {
 							</svg>
 						</button>
 					</header>
-					<form>
-						<div classname="form-row">
-							<div classname="form-group">
+					<form onSubmit={onUserCreate}>
+						<div className="form-row">
+							<div className="form-group">
 								<label htmlFor="firstName">First name</label>
-								<div classname="input-wrapper">
+								<div className="input-wrapper">
 									<span>
-										<i classname="fa-solid fa-user" />
+										<i className="fa-solid fa-user"></i>
 									</span>
 									<input
 										id="firstName"
@@ -40,16 +38,16 @@ export const CreateUser = () => {
 										type="text"
 									/>
 								</div>
-								<p classname="form-error">
+								<p className="form-error">
 									First name should be at least 3 characters
 									long!
 								</p>
 							</div>
-							<div classname="form-group">
+							<div className="form-group">
 								<label htmlFor="lastName">Last name</label>
-								<div classname="input-wrapper">
+								<div className="input-wrapper">
 									<span>
-										<i classname="fa-solid fa-user" />
+										<i className="fa-solid fa-user"></i>
 									</span>
 									<input
 										id="lastName"
@@ -57,18 +55,19 @@ export const CreateUser = () => {
 										type="text"
 									/>
 								</div>
-								<p classname="form-error">
+								<p className="form-error">
 									Last name should be at least 3 characters
 									long!
 								</p>
 							</div>
 						</div>
-						<div classname="form-row">
-							<div classname="form-group">
+
+						<div className="form-row">
+							<div className="form-group">
 								<label htmlFor="email">Email</label>
-								<div classname="input-wrapper">
+								<div className="input-wrapper">
 									<span>
-										<i classname="fa-solid fa-envelope" />
+										<i className="fa-solid fa-envelope"></i>
 									</span>
 									<input
 										id="email"
@@ -76,17 +75,17 @@ export const CreateUser = () => {
 										type="text"
 									/>
 								</div>
-								<p classname="form-error">
+								<p className="form-error">
 									Email is not valid!
 								</p>
 							</div>
-							<div classname="form-group">
+							<div className="form-group">
 								<label htmlFor="phoneNumber">
 									Phone number
 								</label>
-								<div classname="input-wrapper">
+								<div className="input-wrapper">
 									<span>
-										<i classname="fa-solid fa-phone" />
+										<i className="fa-solid fa-phone"></i>
 									</span>
 									<input
 										id="phoneNumber"
@@ -94,16 +93,17 @@ export const CreateUser = () => {
 										type="text"
 									/>
 								</div>
-								<p classname="form-error">
+								<p className="form-error">
 									Phone number is not valid!
 								</p>
 							</div>
 						</div>
-						<div classname="form-group long-line">
+
+						<div className="form-group long-line">
 							<label htmlFor="imageUrl">Image Url</label>
-							<div classname="input-wrapper">
+							<div className="input-wrapper">
 								<span>
-									<i classname="fa-solid fa-image" />
+									<i className="fa-solid fa-image"></i>
 								</span>
 								<input
 									id="imageUrl"
@@ -111,14 +111,15 @@ export const CreateUser = () => {
 									type="text"
 								/>
 							</div>
-							<p classname="form-error">ImageUrl is not valid!</p>
+							<p className="form-error">ImageUrl is not valid!</p>
 						</div>
-						<div classname="form-row">
-							<div classname="form-group">
+
+						<div className="form-row">
+							<div className="form-group">
 								<label htmlFor="country">Country</label>
-								<div classname="input-wrapper">
+								<div className="input-wrapper">
 									<span>
-										<i classname="fa-solid fa-map" />
+										<i className="fa-solid fa-map"></i>
 									</span>
 									<input
 										id="country"
@@ -126,30 +127,31 @@ export const CreateUser = () => {
 										type="text"
 									/>
 								</div>
-								<p classname="form-error">
+								<p className="form-error">
 									Country should be at least 2 characters
 									long!
 								</p>
 							</div>
-							<div classname="form-group">
+							<div className="form-group">
 								<label htmlFor="city">City</label>
-								<div classname="input-wrapper">
+								<div className="input-wrapper">
 									<span>
-										<i classname="fa-solid fa-city" />
+										<i className="fa-solid fa-city"></i>
 									</span>
 									<input id="city" name="city" type="text" />
 								</div>
-								<p classname="form-error">
+								<p className="form-error">
 									City should be at least 3 characters long!
 								</p>
 							</div>
 						</div>
-						<div classname="form-row">
-							<div classname="form-group">
+
+						<div className="form-row">
+							<div className="form-group">
 								<label htmlFor="street">Street</label>
-								<div classname="input-wrapper">
+								<div className="input-wrapper">
 									<span>
-										<i classname="fa-solid fa-map" />
+										<i className="fa-solid fa-map"></i>
 									</span>
 									<input
 										id="street"
@@ -157,17 +159,17 @@ export const CreateUser = () => {
 										type="text"
 									/>
 								</div>
-								<p classname="form-error">
+								<p className="form-error">
 									Street should be at least 3 characters long!
 								</p>
 							</div>
-							<div classname="form-group">
+							<div className="form-group">
 								<label htmlFor="streetNumber">
 									Street number
 								</label>
-								<div classname="input-wrapper">
+								<div className="input-wrapper">
 									<span>
-										<i classname="fa-solid fa-house-chimney" />
+										<i className="fa-solid fa-house-chimney"></i>
 									</span>
 									<input
 										id="streetNumber"
@@ -175,7 +177,7 @@ export const CreateUser = () => {
 										type="text"
 									/>
 								</div>
-								<p classname="form-error">
+								<p className="form-error">
 									Street number should be a positive number!
 								</p>
 							</div>
@@ -183,15 +185,16 @@ export const CreateUser = () => {
 						<div id="form-actions">
 							<button
 								id="action-save"
-								classname="btn"
+								className="btn"
 								type="submit"
 							>
 								Save
 							</button>
 							<button
 								id="action-cancel"
-								classname="btn"
+								className="btn"
 								type="button"
+								onClick={onClose}
 							>
 								Cancel
 							</button>
