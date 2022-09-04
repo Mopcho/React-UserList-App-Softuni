@@ -1,4 +1,4 @@
-export const UserDelete = ({ user, closeModalHandler }) => {
+export const UserDelete = ({ user, closeModalHandler, onUserDelete }) => {
 	return (
 		<div className="overlay">
 			<div className="backdrop" onClick={closeModalHandler}></div>
@@ -35,6 +35,9 @@ export const UserDelete = ({ user, closeModalHandler }) => {
 								id="action-save"
 								className="btn"
 								type="submit"
+								onClick={(event) =>
+									onUserDelete(event, user._id)
+								}
 							>
 								Delete
 							</button>

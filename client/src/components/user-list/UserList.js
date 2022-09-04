@@ -7,11 +7,10 @@ import { UserCreate } from './user-create/UserCreate';
 import { useState } from 'react';
 import { UserActions } from '../../constants/userConstants';
 
-// On user create -> Rerender UserList
 // User Delete -> Close modal
 // User Edit -> CLose modal
 // On user edit -> Rerender UserList
-export const UserList = ({ users }) => {
+export const UserList = ({ users, addUserHandler, removeUserHandler }) => {
 	let [userAction, setUserAction] = useState({ user: null, action: null });
 
 	function openModalHandler(userId, action) {
@@ -50,8 +49,17 @@ export const UserList = ({ users }) => {
 			address,
 		};
 
-		await userService.createUser(userCreateData);
+		const user = await userService.createUser(userCreateData);
+		addUserHandler(user);
+		closeModalHandler();
+	}
 
+	async function onUserDelete(ev, id) {
+		ev.preventDefault();
+
+		await userService.deleteUser(id);
+
+		removeUserHandler(id);
 		closeModalHandler();
 	}
 
@@ -75,6 +83,7 @@ export const UserList = ({ users }) => {
 				<UserDelete
 					user={userAction.user}
 					closeModalHandler={closeModalHandler}
+					onUserDelete={onUserDelete}
 				/>
 			) : null}
 

@@ -24,7 +24,7 @@ export async function createUser(userData) {
 
 		response = await response.json();
 
-		return response;
+		return response.user;
 	} catch (err) {
 		console.log(err);
 	}
@@ -44,7 +44,7 @@ export async function getUser(id) {
 
 export async function deleteUser(id) {
 	try {
-		let response = await fetch(`${baseUrl}/${id}`, { method: 'POST' });
+		let response = await fetch(`${baseUrl}/${id}`, { method: 'DELETE' });
 
 		response = await response.json();
 

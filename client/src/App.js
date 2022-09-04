@@ -18,13 +18,27 @@ function App() {
 		fetchUsers();
 	}, []);
 
+	function addUserHandler(user) {
+		setUsers((users) => [...users, user]);
+	}
+
+	function removeUserHandler(id) {
+		const newUsers = users.filter((user) => user._id !== id);
+
+		setUsers(newUsers);
+	}
+
 	return (
 		<div>
 			<Header></Header>
 			<main className="main">
 				<section className="card users-container">
 					<Search></Search>
-					<UserList users={users} />
+					<UserList
+						users={users}
+						addUserHandler={addUserHandler}
+						removeUserHandler={removeUserHandler}
+					/>
 				</section>
 			</main>
 			<Footer></Footer>
