@@ -10,7 +10,12 @@ import { UserActions } from '../../constants/userConstants';
 // User Delete -> Close modal
 // User Edit -> CLose modal
 // On user edit -> Rerender UserList
-export const UserList = ({ users, addUserHandler, removeUserHandler }) => {
+export const UserList = ({
+	users,
+	addUserHandler,
+	removeUserHandler,
+	editUserHandler,
+}) => {
 	let [userAction, setUserAction] = useState({ user: null, action: null });
 
 	function openModalHandler(userId, action) {
@@ -63,6 +68,34 @@ export const UserList = ({ users, addUserHandler, removeUserHandler }) => {
 		closeModalHandler();
 	}
 
+	async function onUserEdit(ev, userId) {
+		ev.preventDefault();
+
+		let formData = new FormData(ev.target);
+
+		const {
+			firstName,
+			lastName,
+			email,
+			phoneNumber,
+			imageUrl,
+			...address
+		} = Object.fromEntries(formData);
+
+		const userCreateData = {
+			firstName,
+			lastName,
+			email,
+			phoneNumber,
+			imageUrl,
+			address,
+		};
+
+		const user = await userService.updateUser(userId, userCreateData);
+		editUserHandler(user._id, user);
+		closeModalHandler();
+	}
+
 	return (
 		<>
 			{userAction.action === UserActions.Details ? (
@@ -76,6 +109,7 @@ export const UserList = ({ users, addUserHandler, removeUserHandler }) => {
 				<UserEdit
 					user={userAction.user}
 					closeModalHandler={closeModalHandler}
+					onUserEdit={onUserEdit}
 				/>
 			) : null}
 

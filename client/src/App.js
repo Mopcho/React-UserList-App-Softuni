@@ -23,7 +23,18 @@ function App() {
 	}
 
 	function removeUserHandler(id) {
-		const newUsers = users.filter((user) => user._id !== id);
+		let newUsers = users.filter((user) => user._id !== id);
+
+		setUsers(newUsers);
+	}
+
+	function editUserHandler(id, userData) {
+		let newUsers = users.map((user) => {
+			if (user._id === id) {
+				user = userData;
+			}
+			return user;
+		});
 
 		setUsers(newUsers);
 	}
@@ -38,6 +49,7 @@ function App() {
 						users={users}
 						addUserHandler={addUserHandler}
 						removeUserHandler={removeUserHandler}
+						editUserHandler={editUserHandler}
 					/>
 				</section>
 			</main>

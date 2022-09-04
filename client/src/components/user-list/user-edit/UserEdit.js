@@ -1,4 +1,4 @@
-export const UserEdit = ({ user, closeModalHandler }) => {
+export const UserEdit = ({ user, closeModalHandler, onUserEdit }) => {
 	return (
 		<div className="overlay">
 			<div className="backdrop" onClick={closeModalHandler}></div>
@@ -27,7 +27,7 @@ export const UserEdit = ({ user, closeModalHandler }) => {
 							</svg>
 						</button>
 					</header>
-					<form>
+					<form onSubmit={(event) => onUserEdit(event, user._id)}>
 						<div className="form-row">
 							<div className="form-group">
 								<label htmlFor="firstName">First name</label>
@@ -39,7 +39,7 @@ export const UserEdit = ({ user, closeModalHandler }) => {
 										id="firstName"
 										name="firstName"
 										type="text"
-										value={user.firstName}
+										defaultValue={user.firstName}
 									/>
 								</div>
 								<p className="form-error">
@@ -57,7 +57,7 @@ export const UserEdit = ({ user, closeModalHandler }) => {
 										id="lastName"
 										name="lastName"
 										type="text"
-										value={user.lastName}
+										defaultValue={user.lastName}
 									/>
 								</div>
 								<p className="form-error">
@@ -78,7 +78,7 @@ export const UserEdit = ({ user, closeModalHandler }) => {
 										id="email"
 										name="email"
 										type="text"
-										value={user.email}
+										defaultValue={user.email}
 									/>
 								</div>
 								<p className="form-error">
@@ -97,7 +97,7 @@ export const UserEdit = ({ user, closeModalHandler }) => {
 										id="phoneNumber"
 										name="phoneNumber"
 										type="text"
-										value={user.phoneNumber}
+										defaultValue={user.phoneNumber}
 									/>
 								</div>
 								<p className="form-error">
@@ -116,7 +116,7 @@ export const UserEdit = ({ user, closeModalHandler }) => {
 									id="imageUrl"
 									name="imageUrl"
 									type="text"
-									value={user.imageUrl}
+									defaultValue={user.imageUrl}
 								/>
 							</div>
 							<p className="form-error">ImageUrl is not valid!</p>
@@ -133,7 +133,7 @@ export const UserEdit = ({ user, closeModalHandler }) => {
 										id="country"
 										name="country"
 										type="text"
-										value={user.address.country}
+										defaultValue={user.address.country}
 									/>
 								</div>
 								<p className="form-error">
@@ -151,7 +151,7 @@ export const UserEdit = ({ user, closeModalHandler }) => {
 										id="city"
 										name="city"
 										type="text"
-										value={user.address.city}
+										defaultValue={user.address.city}
 									/>
 								</div>
 								<p className="form-error">
@@ -171,7 +171,7 @@ export const UserEdit = ({ user, closeModalHandler }) => {
 										id="street"
 										name="street"
 										type="text"
-										value={user.address.street}
+										defaultValue={user.address.street}
 									/>
 								</div>
 								<p className="form-error">
@@ -190,7 +190,7 @@ export const UserEdit = ({ user, closeModalHandler }) => {
 										id="streetNumber"
 										name="streetNumber"
 										type="text"
-										value={user.address.streetNumber}
+										defaultValue={user.address.streetNumber}
 									/>
 								</div>
 								<p className="form-error">

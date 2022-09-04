@@ -53,3 +53,21 @@ export async function deleteUser(id) {
 		console.log(err);
 	}
 }
+
+export async function updateUser(id, userData) {
+	try {
+		let response = await fetch(`${baseUrl}/${id}`, {
+			method: 'PUT',
+			body: JSON.stringify(userData),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+
+		response = await response.json();
+
+		return response.user;
+	} catch (err) {
+		console.log(err);
+	}
+}
