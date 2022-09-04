@@ -1,12 +1,15 @@
-export const UserEdit = (props) => {
+export const UserEdit = ({ user, closeModalHandler }) => {
 	return (
 		<div className="overlay">
-			<div className="backdrop"></div>
+			<div className="backdrop" onClick={closeModalHandler}></div>
 			<div className="modal">
 				<div className="user-container">
 					<header className="headers">
 						<h2>Edit User</h2>
-						<button className="btn close" onClick={props.onClose}>
+						<button
+							className="btn close"
+							onClick={closeModalHandler}
+						>
 							<svg
 								aria-hidden="true"
 								focusable="false"
@@ -36,6 +39,7 @@ export const UserEdit = (props) => {
 										id="firstName"
 										name="firstName"
 										type="text"
+										value={user.firstName}
 									/>
 								</div>
 								<p className="form-error">
@@ -53,6 +57,7 @@ export const UserEdit = (props) => {
 										id="lastName"
 										name="lastName"
 										type="text"
+										value={user.lastName}
 									/>
 								</div>
 								<p className="form-error">
@@ -73,6 +78,7 @@ export const UserEdit = (props) => {
 										id="email"
 										name="email"
 										type="text"
+										value={user.email}
 									/>
 								</div>
 								<p className="form-error">
@@ -91,6 +97,7 @@ export const UserEdit = (props) => {
 										id="phoneNumber"
 										name="phoneNumber"
 										type="text"
+										value={user.phoneNumber}
 									/>
 								</div>
 								<p className="form-error">
@@ -109,6 +116,7 @@ export const UserEdit = (props) => {
 									id="imageUrl"
 									name="imageUrl"
 									type="text"
+									value={user.imageUrl}
 								/>
 							</div>
 							<p className="form-error">ImageUrl is not valid!</p>
@@ -125,6 +133,7 @@ export const UserEdit = (props) => {
 										id="country"
 										name="country"
 										type="text"
+										value={user.address.country}
 									/>
 								</div>
 								<p className="form-error">
@@ -138,7 +147,12 @@ export const UserEdit = (props) => {
 									<span>
 										<i className="fa-solid fa-city"></i>
 									</span>
-									<input id="city" name="city" type="text" />
+									<input
+										id="city"
+										name="city"
+										type="text"
+										value={user.address.city}
+									/>
 								</div>
 								<p className="form-error">
 									City should be at least 3 characters long!
@@ -157,6 +171,7 @@ export const UserEdit = (props) => {
 										id="street"
 										name="street"
 										type="text"
+										value={user.address.street}
 									/>
 								</div>
 								<p className="form-error">
@@ -175,6 +190,7 @@ export const UserEdit = (props) => {
 										id="streetNumber"
 										name="streetNumber"
 										type="text"
+										value={user.address.streetNumber}
 									/>
 								</div>
 								<p className="form-error">
@@ -194,7 +210,7 @@ export const UserEdit = (props) => {
 								id="action-cancel"
 								className="btn"
 								type="button"
-								onClick={props.onClose}
+								onClick={closeModalHandler}
 							>
 								Cancel
 							</button>

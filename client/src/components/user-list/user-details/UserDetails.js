@@ -1,12 +1,15 @@
-export const UserDetails = (props) => {
+export const UserDetails = ({ user, closeModalHandler }) => {
 	return (
 		<div className="overlay">
-			<div className="backdrop" />
+			<div className="backdrop" onClick={closeModalHandler} />
 			<div className="modal">
 				<div className="detail-container">
 					<header className="headers">
 						<h2>User Detail</h2>
-						<button className="btn close" onClick={props.onClose}>
+						<button
+							className="btn close"
+							onClick={closeModalHandler}
+						>
 							<svg
 								aria-hidden="true"
 								focusable="false"
@@ -34,28 +37,29 @@ export const UserDetails = (props) => {
 						</div>
 						<div className="user-details">
 							<p>
-								User Id: <strong></strong>
+								User Id: <strong>{user._id}</strong>
 							</p>
 							<p>
 								Full Name:
-								<strong></strong>
+								<strong>{`${user.firstName} ${user.lastName}`}</strong>
 							</p>
 							<p>
-								Email: <strong></strong>
+								Email: <strong>{user.email}</strong>
 							</p>
 							<p>
-								Phone Number: <strong></strong>
+								Phone Number:{' '}
+								<strong>{user.phoneNumber}</strong>
 							</p>
 							<p>
 								Address:
-								<strong></strong>
+								<strong>{`${user.address.country}, ${user.address.city}, ${user.address.street} ${user.address.streetNumber}`}</strong>
 							</p>
 
 							<p>
-								Created on: <strong></strong>
+								Created on: <strong>{user.createdAt}</strong>
 							</p>
 							<p>
-								Modified on: <strong></strong>
+								Modified on: <strong>{user.editedAt}</strong>
 							</p>
 						</div>
 					</div>

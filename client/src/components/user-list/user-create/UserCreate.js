@@ -1,12 +1,32 @@
 export const UserCreate = (props) => {
 	async function onSubmit(ev) {
-		console.log(ev);
 		ev.preventDefault();
 		try {
-			await fetch('http://localhost:3005/api/users', {
+			const body = {
+				firstName: ev.target.firstName.value,
+				lastName: ev.target.lastName.value,
+				email: ev.target.email.value,
+				imageUrl: ev.target.imageUrl.value,
+				phoneNumber: ev.target.phoneNumber.value,
+				address: {
+					city: ev.target.city.value,
+					country: ev.target.country.value,
+					streetNumber: ev.target.streetNumber.value,
+					street: ev.target.street.value,
+				},
+			};
+
+			const response = await fetch('http://localhost:3005/api/users', {
 				method: 'POST',
-				body: JSON.stringify(ev.target.value),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(body),
 			});
+
+			let data = await response.json();
+
+			console.log(data);
 		} catch (error) {
 			console.log(error);
 		}

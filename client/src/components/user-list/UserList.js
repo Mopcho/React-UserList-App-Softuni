@@ -1,76 +1,48 @@
+import * as userService from '../../services/userService';
 import { UserItem } from './user-item/UserItem';
-import { useEffect, useState } from 'react';
+import { UserDetails } from './user-details/UserDetails';
 import { UserEdit } from './user-edit/UserEdit';
 import { UserDelete } from './user-delete/UserDelete';
-import { UserDetails } from './user-details/UserDetails';
-import { UserCreate } from './user-create/UserCreate';
+import { useState } from 'react';
+import { UserActions } from '../../constants/userConstants';
 
-export const UserList = () => {
-	let [users, setUsers] = useState([]);
-	let [editToggle, setEditToggle] = useState(false);
-	let [deleteToggle, setDeleteToggle] = useState(false);
-	let [infoToggle, setInfoToggle] = useState(false);
-	let [createToggle, setCreateToggle] = useState(false);
+export const UserList = ({ users }) => {
+	let [userAction, setUserAction] = useState({ user: null, action: null });
 
-	useEffect(() => {
-		async function fetchData() {
-			let response = await fetch('http://localhost:3005/api/users');
-			response = await response.json();
-
-			setUsers(response.users);
-		}
-
-		fetchData();
-	}, []);
-
-	function openEdit() {
-		setEditToggle(true);
+	function openModalHandler(userId, action) {
+		userService.getUser(userId).then((user) => {
+			setUserAction({
+				user,
+				action,
+			});
+		});
 	}
 
-	function closeEdit() {
-		setEditToggle(false);
-	}
-
-	function openDelete() {
-		setDeleteToggle(true);
-	}
-
-	function closeDelete() {
-		setDeleteToggle(false);
-	}
-
-	function openDetails() {
-		setInfoToggle(true);
-	}
-
-	function closeInfo() {
-		setInfoToggle(false);
-	}
-
-	function openCreate() {
-		setCreateToggle(true);
-	}
-
-	function closeCreate() {
-		setCreateToggle(false);
+	function closeModalHandler() {
+		setUserAction({ user: null, action: null });
 	}
 
 	return (
 		<>
-			{editToggle === true ? (
-				<UserEdit onClose={closeEdit}></UserEdit>
+			{userAction.action === UserActions.Details ? (
+				<UserDetails
+					user={userAction.user}
+					closeModalHandler={closeModalHandler}
+				/>
 			) : null}
 
-			{deleteToggle === true ? (
-				<UserDelete onClose={closeDelete}></UserDelete>
+			{userAction.action === UserActions.Edit ? (
+				<UserEdit
+					user={userAction.user}
+					closeModalHandler={closeModalHandler}
+				/>
 			) : null}
 
-			{infoToggle === true ? (
-				<UserDetails onClose={closeInfo}></UserDetails>
-			) : null}
-
-			{createToggle === true ? (
-				<UserCreate onClose={closeCreate}></UserCreate>
+			{userAction.action === UserActions.Delete ? (
+				<UserDelete
+					user={userAction.user}
+					closeModalHandler={closeModalHandler}
+				/>
 			) : null}
 
 			<div className="table-wrapper">
@@ -172,23 +144,17 @@ export const UserList = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{users
-							? users.map((user) => (
-									<UserItem
-										key={user._id}
-										{...user}
-										openEdit={openEdit}
-										openDelete={openDelete}
-										openDetails={openDetails}
-									/>
-							  ))
-							: null}
+						{users.map((user) => (
+							<UserItem
+								key={user._id}
+								user={user}
+								openModalHandler={openModalHandler}
+							></UserItem>
+						))}
 					</tbody>
 				</table>
 			</div>
-			<button className="btn-add btn" onClick={openCreate}>
-				Add new user
-			</button>
+			<button className="btn-add btn">Add new user</button>
 		</>
 	);
 };
