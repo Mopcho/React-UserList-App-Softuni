@@ -1,45 +1,15 @@
-export const UserCreate = (props) => {
-	async function onSubmit(ev) {
-		ev.preventDefault();
-		try {
-			const body = {
-				firstName: ev.target.firstName.value,
-				lastName: ev.target.lastName.value,
-				email: ev.target.email.value,
-				imageUrl: ev.target.imageUrl.value,
-				phoneNumber: ev.target.phoneNumber.value,
-				address: {
-					city: ev.target.city.value,
-					country: ev.target.country.value,
-					streetNumber: ev.target.streetNumber.value,
-					street: ev.target.street.value,
-				},
-			};
-
-			const response = await fetch('http://localhost:3005/api/users', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(body),
-			});
-
-			let data = await response.json();
-
-			console.log(data);
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
+export const UserCreate = ({ closeModalHandler, onUserCreate }) => {
 	return (
 		<div className="overlay">
-			<div className="backdrop"></div>
+			<div className="backdrop" onClick={closeModalHandler}></div>
 			<div className="modal">
 				<div className="user-container">
 					<header className="headers">
 						<h2>Add User</h2>
-						<button className="btn close" onClick={props.onClose}>
+						<button
+							className="btn close"
+							onClick={closeModalHandler}
+						>
 							<svg
 								aria-hidden="true"
 								focusable="false"
@@ -57,7 +27,7 @@ export const UserCreate = (props) => {
 							</svg>
 						</button>
 					</header>
-					<form onSubmit={onSubmit}>
+					<form onSubmit={onUserCreate}>
 						<div className="form-row">
 							<div className="form-group">
 								<label htmlFor="firstName">First name</label>
@@ -227,7 +197,7 @@ export const UserCreate = (props) => {
 								id="action-cancel"
 								className="btn"
 								type="button"
-								onClick={props.onClose}
+								onClick={closeModalHandler}
 							>
 								Cancel
 							</button>

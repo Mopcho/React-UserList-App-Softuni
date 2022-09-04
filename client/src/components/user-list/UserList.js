@@ -3,9 +3,14 @@ import { UserItem } from './user-item/UserItem';
 import { UserDetails } from './user-details/UserDetails';
 import { UserEdit } from './user-edit/UserEdit';
 import { UserDelete } from './user-delete/UserDelete';
+import { UserCreate } from './user-create/UserCreate';
 import { useState } from 'react';
 import { UserActions } from '../../constants/userConstants';
 
+// On user create -> Rerender UserList
+// User Delete -> Close modal
+// User Edit -> CLose modal
+// On user edit -> Rerender UserList
 export const UserList = ({ users }) => {
 	let [userAction, setUserAction] = useState({ user: null, action: null });
 
@@ -20,6 +25,34 @@ export const UserList = ({ users }) => {
 
 	function closeModalHandler() {
 		setUserAction({ user: null, action: null });
+	}
+
+	async function onUserCreate(ev) {
+		ev.preventDefault();
+
+		let formData = new FormData(ev.target);
+
+		const {
+			firstName,
+			lastName,
+			email,
+			phoneNumber,
+			imageUrl,
+			...address
+		} = Object.fromEntries(formData);
+
+		const userCreateData = {
+			firstName,
+			lastName,
+			email,
+			phoneNumber,
+			imageUrl,
+			address,
+		};
+
+		await userService.createUser(userCreateData);
+
+		closeModalHandler();
 	}
 
 	return (
@@ -42,6 +75,13 @@ export const UserList = ({ users }) => {
 				<UserDelete
 					user={userAction.user}
 					closeModalHandler={closeModalHandler}
+				/>
+			) : null}
+
+			{userAction.action === UserActions.Create ? (
+				<UserCreate
+					closeModalHandler={closeModalHandler}
+					onUserCreate={onUserCreate}
 				/>
 			) : null}
 
@@ -154,7 +194,12 @@ export const UserList = ({ users }) => {
 					</tbody>
 				</table>
 			</div>
-			<button className="btn-add btn">Add new user</button>
+			<button
+				className="btn-add btn"
+				onClick={() => openModalHandler(null, UserActions.Create)}
+			>
+				Add new user
+			</button>
 		</>
 	);
 };

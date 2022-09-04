@@ -12,12 +12,14 @@ export async function getUsers() {
 	}
 }
 
-export async function createUser(data) {
+export async function createUser(userData) {
 	try {
 		let response = await fetch(baseUrl, {
 			method: 'POST',
-			body: data,
-			'Content-Type': 'application/json',
+			body: JSON.stringify(userData),
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		});
 
 		response = await response.json();
